@@ -2,7 +2,7 @@
     <div class="bar ">
         <div class="title">
 
-            <a href="" ><div ><span class="first-title">My</span><span class="second-title">Blog</span></div></a>
+            <a href="/" ><div ><span class="first-title">My</span><span class="second-title">Blog</span></div></a>
         </div>
         
         <div class="links">

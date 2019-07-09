@@ -1,15 +1,13 @@
 <?php
 session_start();
 require "Model.php";
-require "Help.php";
 class User extends Model{
     public static function authenticate($username,$password){
         $user = User::where("username","=",$username);
         if(count($user)<1){
-            return false;
+            return null;
         }
         if(password_verify($password,$user[0]["password"])){
-            echo "sc";
             $user = User::find($user[0]["id"]);
             $authToken = Help::randomString();
             $checkUniqueToken = true;
@@ -26,8 +24,9 @@ class User extends Model{
 
             $user->auth_token = $authToken;
             $user->update();
+            return $user;
         }
-        
+        return null;
     }
 
     public static function check(){
@@ -46,7 +45,6 @@ class User extends Model{
         $rows=User::where("username","=",$username);
         
         if(count($rows)>0){
-            echo "continue";
             return null;
         }
         $password = password_hash($password,PASSWORD_DEFAULT);
