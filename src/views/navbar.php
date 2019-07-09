@@ -1,3 +1,6 @@
+<?
+set_include_path("/var/www/html");
+?>
 <div>
     <div class="bar ">
         <div class="title">
@@ -6,8 +9,17 @@
         </div>
         
         <div class="links">
-            <a href="/signup.php" class="link">Sign up</a>
-            <a href="/login.php" class="link">Login</a>
+            <? if(User::check()==null) :?>
+                <a href="/signup.php" class="link">Sign up</a>
+                <a href="/login.php" class="link">Login</a>
+            <? else :?>
+                <a href="/login.php" class="link">
+                    <?php  
+                        $user=User::check();
+                        echo "Hello $user->name";
+                    ?>
+                </a>
+            <?endif;?>
         </div>
         <form action="" class="search">
             <input type="search" name="q" placeholder="search..." />

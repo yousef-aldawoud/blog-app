@@ -1,7 +1,7 @@
 <?php
 session_start();
 set_include_path("var/www/html/");
-
+require_once("Models/Help.php");
 class CSRFTokenController{
     const TOKEN_LENGTH = 15;
     public static function csrf_token(){

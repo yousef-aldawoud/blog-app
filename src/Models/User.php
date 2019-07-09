@@ -1,6 +1,7 @@
 <?php
 session_start();
-require "Model.php";
+require_once "Model.php";
+require_once "Help.php";
 class User extends Model{
     public static function authenticate($username,$password){
         $user = User::where("username","=",$username);
@@ -32,7 +33,6 @@ class User extends Model{
     public static function check(){
         $authToken = $_SESSION['auth_token'];
         $users = User::where("auth_token","=",$authToken);
-        var_dump(count($users));
         if(count($users)>0){
             $user = User::find($users[0]["id"]);
             return $user;

@@ -1,8 +1,8 @@
 <?
 set_include_path("var/www/html/");
 session_start();
-require("Models/Help.php");
-require("Controllers/CSRFController.php");
+require_once("Controllers/CSRFController.php");
+require_once("middlewares.php");
 $token = CSRFTokenController::csrf_token();
  ?>
 <? include('views/main-layout.php');?>

@@ -1,5 +1,5 @@
 <?php
-require 'Table.php';
+require_once 'Table.php';
 
 $users = new Table("users");
 

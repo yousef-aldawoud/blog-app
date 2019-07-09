@@ -1,7 +1,7 @@
 <?
 set_include_path("/var/www/html/");
 
-require("Models/User.php");
+require_once("Models/User.php");
 class UserController{
     public function login(){
         if(empty($_POST['username'])||empty($_POST['password'])){
@@ -9,7 +9,7 @@ class UserController{
             return $_SERVER['HTTP_REFERER'];
         }
         $user=User::authenticate($_POST['username'],$_POST['password']);
-        if($user==null){
+        if($user===null){
             $_SESSION['errors']=['Username or password is incorrect'];
             return $_SERVER['HTTP_REFERER'];;
         }

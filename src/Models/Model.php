@@ -1,6 +1,6 @@
 <?php
 set_include_path("var/www/html/");
-require './Database/Connection.php';
+require_once './Database/Connection.php';
 
 class Model {
     public $id;
