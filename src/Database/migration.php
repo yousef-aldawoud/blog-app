@@ -1,6 +1,5 @@
 <?php
 require_once 'Table.php';
-
 function create(){
 
     $command = $argv[1];
@@ -46,12 +45,23 @@ function create(){
     $posts->timestamp("created_at");
     $posts->timestamp("updated_at");
     $posts->createTable();
-    
+
     echo "\nCreated posts table\n\n";
+
+    $comments = new Table("comments");
+    $comments->bigIncrement("id");
+    $comments->integer("user_id",255);
+    $comments->integer("post_id",255);
+    $comments->string("comment",255);
+    $comments->timestamp("created_at");
+    $comments->timestamp("updated_at");
+    $comments->createTable();
+    
+    echo "\nCreated comments table\n\n";
 }
 
 function drop(){
-    $tables = ['users','posts',"roles","user_role"];
+    $tables = ['users','posts',"roles","user_role","comments"];
     foreach($tables as $table){
         Table::dropTable($table);
         echo "dropped $table table \n";

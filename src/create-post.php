@@ -5,6 +5,7 @@ require_once("middlewares.php");
 require_once("Models/Help.php");
 require_once("Controllers/CSRFController.php");
 $token = CSRFTokenController::csrf_token();
+
  ?>
 <? include('views/main-layout.php');?>
 <body>

@@ -9,12 +9,29 @@ class Model {
     public $fields = [];
     protected $nofield = ["id"];
     protected $connection;
+
+    
     public function __construct(){
         if($this->table===""){
             $this->table=strtolower(get_class($this))."s";
         }
         $this->connection = Connection::getConnection();
     }
+
+    public function hasMany($tableName,$fieldName="\\"){
+        if($fieldName==="\\"){
+            $fieldName=substr($this->table,0,strlen($this->table));
+        }
+        $this->statment = "SELECT * FROM $tableName WHERE $fieldName = $this->id";
+        return $this;
+    }
+
+    public function getAll(){
+        $statment = $this->connection->prepare($this->statment);
+        $statment->execute();
+        $rows = $statment->fetchAll();
+    }
+
     public function insert(){
         $params = [];
         foreach($this->fields as $columnName=>$value){

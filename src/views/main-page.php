@@ -1,16 +1,22 @@
 <? 
 set_include_path("/var/www/html");
 require_once('Models/Post.php');
+require_once('Models/User.php');
 $model = new Post;
 $posts = $model->getAllStatement()->Pagenaite(5);
 ?>
 <div class="container">
     <div class="main-container">
-        <h1>Articles</h1>
+        <h1>Posts</h1>
         <hr>
         <div style="padding:20px;">
+            <? if (User::check()!==null):?>
+                <a href="/create-post.php" class="btn ma">Create post</a>
+            <? endif; ?>
 
-            <a href="/create-post.php" class="btn ma">Create post</a>
+            <? if($posts['total']===0):?>
+                <p class="">No posts avalible</p>
+            <? endif ?>
         </div>
         <? foreach($posts['data'] as $post): ?>
             <?php include('views/post.php')?>
