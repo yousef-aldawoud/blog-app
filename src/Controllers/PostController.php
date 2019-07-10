@@ -23,4 +23,20 @@ class PostController{
         
     }
 
+    public function delete(){
+        if(empty($_POST['post_id'])){
+            return "/";
+        }
+
+        $post = Post::find($_POST['post_id']);
+        if($post===null){
+            
+            return "/";
+        }
+
+        if(!User::check()->id!==$post->user_id&&!User::check()->hasRole("admin")){
+            return "/";
+        }
+        $post->delete();
+    }
 }
