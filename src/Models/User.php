@@ -29,6 +29,9 @@ class User extends Model{
         }
         return null;
     }
+    public static function logout(){
+        unset($_SESSION['auth_token']);
+    }
 
     public static function check(){
         $authToken = $_SESSION['auth_token'];

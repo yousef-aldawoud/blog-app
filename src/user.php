@@ -28,4 +28,8 @@ switch($_POST['route']){
         $link = "Location: ".$userController->signup();
         header($link);
         break;
+    case "logout":
+        $link = "Location: ".$userController->logout();
+        header($link);
+        break;
 }

@@ -1,5 +1,7 @@
 <?
 set_include_path("/var/www/html");
+require_once("Controllers/CSRFController.php");
+$token = CSRFTokenController::csrf_token();
 ?>
 <div>
     <div class="bar ">
@@ -21,9 +23,10 @@ set_include_path("/var/www/html");
                 ?>
             </button>
             <div class="dropdown-content">
-                <form action="/logout.php" method="post">
+                <form action="/user.php" method="post">
                 <button class="logout-drop-btn">Logout</button>
-                    <input type="hidden" value="" name="_token">
+                    <input type="hidden" value="<? echo $token; ?>" name="_token">
+                    <input type="hidden" name="route" value="logout">
                 </form>
             </div>
             </div> 
@@ -44,9 +47,16 @@ set_include_path("/var/www/html");
                     login
                 </a>
             <? else:?>
+
+            <form action="/user.php" method="post">
+            
                 <button class="logout collapsed-links" href="/login.php">
                     logout
                 </button>
+
+                <input type="hidden" value="<? echo $token; ?>" name="_token">
+                    <input type="hidden" name="route" value="logout">
+            </form>
             <? endif;?>
             </div>
         </div>

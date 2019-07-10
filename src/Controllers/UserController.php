@@ -30,4 +30,11 @@ class UserController{
         return "/";
     }
 
+    public function logout(){
+        if(User::check()!==null){
+            User::logout();
+        }
+        
+    }
+
 }
