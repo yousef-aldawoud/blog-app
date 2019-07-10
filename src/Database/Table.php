@@ -44,6 +44,18 @@ class Table{
         array_push($this->columns,$column);
         
     }
+
+    public function text($columnName,$null=false){
+        $nullable = $null ? "" : "NOT NULL";
+        $arraySize=sizeof($this->columns);
+        $column = array();
+
+        $column["statment"] = "$columnName MEDIUMTEXT $nullable";
+        $column["name"] = $columnName;
+        $column["type"] = "MEDIUMTEXT";
+        array_push($this->columns,$column);
+    }
+
     public function integer($columnName,$size,$null=false){
         
         $nullable = $null ? "" : "NOT NULL";

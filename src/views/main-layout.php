@@ -8,4 +8,5 @@ require_once("Models/User.php");
         <link rel="stylesheet" href="style/navbar.css">
         <link rel="stylesheet" href="style/grid.css">
         <link rel="stylesheet" href="style/login.css">
+        <link rel="stylesheet" href="style/post.css">
     </head>

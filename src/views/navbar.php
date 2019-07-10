@@ -13,12 +13,20 @@ set_include_path("/var/www/html");
                 <a href="/signup.php" class="link">Sign up</a>
                 <a href="/login.php" class="link">Login</a>
             <? else :?>
-                <a href="/login.php" class="link">
-                    <?php  
-                        $user=User::check();
-                        echo "Hello $user->name";
-                    ?>
-                </a>
+            <div class="dropdown">
+            <button class="dropbtn">
+                <?
+                    $user = User::check();
+                    echo "Hello ".$user->name;
+                ?>
+            </button>
+            <div class="dropdown-content">
+                <form action="/logout.php" method="post">
+                <button class="logout-drop-btn">Logout</button>
+                    <input type="hidden" value="" name="_token">
+                </form>
+            </div>
+            </div> 
             <?endif;?>
         </div>
         <form action="" class="search">
@@ -28,16 +36,18 @@ set_include_path("/var/www/html");
         <div class="nav-drawer">
             <button class="links-btn" id="list-btn" onclick="showLinks">Links ▼</button>
             <div class="link-list">
-
-                <a class="nav-drawer-link collapsed-links" href="#contat">
-                    About us
-                </a>
-                <a class="nav-drawer-link collapsed-links" href="/">
-                    Contact
+            <? if(User::check()==null) :?>
+                <a class="nav-drawer-link collapsed-links" href="/signup.php">
+                    Sign-up
                 </a>
                 <a class="nav-drawer-link collapsed-links" href="/login.php">
                     login
                 </a>
+            <? else:?>
+                <button class="logout collapsed-links" href="/login.php">
+                    logout
+                </button>
+            <? endif;?>
             </div>
         </div>
     </div>

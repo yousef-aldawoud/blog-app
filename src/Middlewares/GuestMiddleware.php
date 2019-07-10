@@ -7,9 +7,9 @@ class GuestMiddleware implements Middleware{
     public function allow():bool{
         if(in_array($_SERVER['REQUEST_URI'],$this->routes)){
             return User::check()===null;
-            die($_SERVER['REQUEST_URI']);
+            
         }
-        return false;
+        return true;
     }
 
     public function next(){

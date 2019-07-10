@@ -152,6 +152,7 @@ body {
     }
     .hide-sm{
         visibility: hidden;
+        display: none;
     }
     
     .container{
@@ -204,4 +205,17 @@ body {
 .pagination .active{
     background: red;
     color: white;
+}
+.ma{
+    margin: 20px 20px;
+}
+.btn{
+    border-radius: 10px;
+    background: rgb(76, 146, 163);
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+}
+.btn:hover{
+    background: #2794be;
 }

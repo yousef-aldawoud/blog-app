@@ -1,5 +1,6 @@
 <?
 set_include_path("var/www/html/");
+
  ?>
 <? include('views/main-layout.php');?>
 <body>

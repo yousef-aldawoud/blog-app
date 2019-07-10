@@ -177,6 +177,13 @@ html {
     background: #333;
     color:white;
 }
+.logout{
+    height: 40px;
+    width:100%;
+    border: solid white 0.1px;
+    background: #333;
+    color:white;
+}
 @keyframes show-links-animation{
     from {
         height: 0%;
@@ -204,3 +211,62 @@ html {
     background: #333;
     color:white;
 }
+
+
+
+
+
+@keyframes drop-in {
+ 0% {
+    top:calc(100% + 4px);
+    opacity:0;
+ }
+ 100% {
+    top:calc(100% + 12px);
+    opacity:1;
+ }
+}
+
+   
+
+ /* Dropdown Button */
+ .dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  
+  /* Change color of dropdown links on hover */
+  .logout-drop-btn:hover {background-color: red;}
+  .logout-drop-btn{
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background: #243024;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #243024;} 

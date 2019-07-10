@@ -4,6 +4,7 @@ require_once './Database/Connection.php';
 
 class Model {
     public $id;
+    protected $statment = "";
     protected $table="";
     public $fields = [];
     protected $nofield = ["id"];
@@ -45,6 +46,45 @@ class Model {
         $statment->execute();
         return $statment->setFetchMode(PDO::FETCH_ASSOC);
         
+    }
+    public function Pagenaite($limit, $current_holder="page"){
+        $result = [];
+
+        if(empty($_GET[$current_holder])||!is_numeric( $_GET[$current_holder])){
+            $currentPage = 1;
+        }else{
+
+            $currentPage = $_GET[$current_holder];
+        }
+        
+        $stmt=$this->connection->prepare($this->statment);
+        $stmt->execute();
+        $totalNumberOfRows = $stmt->rowCount();
+        $numberOfPages = (int) $totalNumberOfRows/$limit;
+        $start = $limit * ($currentPage-1);
+        $end = $start + ($currentPage*$limit);
+        $statment = $this->connection->prepare($this->statment." LIMIT :start, :end");
+        $statment->bindParam(":start",$start);
+        $statment->bindParam(":end",$end);
+        $statment->execute();
+        $rows = $statment->fetchAll();
+        if($numberOfPages-intval($numberOfPages)>0){
+            $numberOfPages = intval($numberOfPages)+1;
+        }
+        
+        
+        $result['total']=$totalNumberOfRows; 
+        $result['current']=$currentPage;
+        $result['number_of_pages']=$numberOfPages;
+        $result['previous_page']=$currentPage-1;
+        $result['next_page']=$currentPage+1;
+
+        $result['data']=$rows;
+        return $result;
+    }
+    public function getAllStatement(){
+        $this->statment= "SELECT * FROM $this->table";
+        return $this;
     }
     public static function find($id){
         $model = new static();

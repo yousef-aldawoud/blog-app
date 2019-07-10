@@ -1,7 +1,7 @@
 <?
 set_include_path("var/www/html/");
 session_start();
-if(!isset($_SESSION['token_error'])){
+if(!isset($_SESSION['_token_error'])){
     header("Location: /");
 }
  ?>
