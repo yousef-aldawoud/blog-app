@@ -1,6 +1,6 @@
 <?php
 require_once 'Table.php';
-/*
+
 $users = new Table("users");
 
 //creates user table
@@ -34,8 +34,9 @@ $role_user->timestamp("updated_at");
 $role_user->createTable();
 
 echo "\nCreated user_role table";
-*/
+
 $posts = new Table("posts");
+$posts->bigIncrement("id");
 $posts->integer("user_id",255);
 $posts->string("title",255);
 $posts->text("content");

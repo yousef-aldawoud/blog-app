@@ -62,10 +62,9 @@ class Model {
         $totalNumberOfRows = $stmt->rowCount();
         $numberOfPages = (int) $totalNumberOfRows/$limit;
         $start = $limit * ($currentPage-1);
-        $end = $start + ($currentPage*$limit);
-        $statment = $this->connection->prepare($this->statment." LIMIT :start, :end");
+        $statment = $this->connection->prepare($this->statment." LIMIT :start, :limit");
         $statment->bindParam(":start",$start);
-        $statment->bindParam(":end",$end);
+        $statment->bindParam(":limit",$limit);
         $statment->execute();
         $rows = $statment->fetchAll();
         if($numberOfPages-intval($numberOfPages)>0){

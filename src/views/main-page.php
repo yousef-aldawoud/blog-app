@@ -2,7 +2,7 @@
 set_include_path("/var/www/html");
 require_once('Models/Post.php');
 $model = new Post;
-$posts = $model->getAllStatement()->Pagenaite(3);
+$posts = $model->getAllStatement()->Pagenaite(5);
 ?>
 <div class="container">
     <div class="main-container">
