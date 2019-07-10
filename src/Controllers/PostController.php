@@ -20,7 +20,24 @@ class PostController{
 
     }
     public function update(){
-        
+        if(empty($_POST['post_id'])||empty($_POST['title'])||empty($_POST['content'])){
+            $_SESSION['errors']=['Title can\'t be empty','Content can\'t be empty'];
+            return $_SERVER['HTTP_REFERER'];
+        }
+
+        $post = Post::find($_POST['post_id']);
+        if($post===null){
+            return "/";
+        }
+
+        if(User::check()->id!=$post->user_id){
+            return "/";
+        }
+        $post->title = $_POST['title'];
+        $post->content = $_POST['content'];
+        $post->update();
+        return "/";
+            
     }
 
     public function delete(){

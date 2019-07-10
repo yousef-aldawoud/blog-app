@@ -2,11 +2,15 @@
 set_include_path("var/www/html/");
 require_once 'Middlewares/Middleware.php';
 require_once 'Models/User.php';
-class AuthMiddleware implements Middleware{
-    private $routes = ['/create-post.php',"/update-post.php"];
+require_once 'Models/Post.php';
+class ModifyPostMiddleware implements Middleware{
+    private $routes = ["/update-post.php"];
     public function allow():bool{
         if(in_array(explode ("?",$_SERVER['REQUEST_URI'])[0] ,$this->routes)){
-            return User::check()!==null;
+            if(Post::find($_GET['post_id'])===null){
+                return true;
+            }
+            return User::check()->id==Post::find($_GET['post_id'])->user_id;
             
         }
         return true;

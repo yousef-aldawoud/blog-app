@@ -5,7 +5,7 @@ require_once 'Models/User.php';
 class GuestMiddleware implements Middleware{
     private $routes = ["/signup.php","/login.php"];
     public function allow():bool{
-        if(in_array($_SERVER['REQUEST_URI'],$this->routes)){
+        if(in_array(explode ("?",$_SERVER['REQUEST_URI'])[0],$this->routes)){
             return User::check()===null;
             
         }
