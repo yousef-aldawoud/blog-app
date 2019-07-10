@@ -65,7 +65,7 @@ class User extends Model{
     public function hasRole($roleSlug){
         $role = Role::where("slug","=",$roleSlug);
         $roleID = $role[0]['id'];
-        $statement = $this->getConnection()->prepare("SELECT * FROM user_role WHERE user_id = '".$this->id."' & role_id = '$roleID'");
+        $statement = $this->getConnection()->prepare("SELECT * FROM user_role WHERE user_id = ".$this->id." && role_id = $roleID");
         $statement->execute();
         return $statement->rowCount()>=1;
     }
