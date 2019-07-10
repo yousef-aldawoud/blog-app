@@ -1,4 +1,5 @@
 ErrorDocument 404 /404.php
 RedirectMatch ^/storage.*$ /index.php
 RedirectMatch ^/Database.*$ /index.php
+RedirectMatch ^/setup.*$ /index.php
 RedirectMatch ^/views.*$ /index.php

@@ -56,6 +56,8 @@ class User extends Model{
         $user->username = $username;
         $user->password = $password;
         $user->insert();
+        $row=User::where("username","=",$username);
+        $user = User::find($row[0]['id']);
         return $user;
     }
 
