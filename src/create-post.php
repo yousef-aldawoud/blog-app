@@ -22,7 +22,21 @@ $token = CSRFTokenController::csrf_token();
                         <button class="btn">Create</button>
                     </div>
                 </form>
-                
+                <?if (isset($_SESSION['errors'])): ?>
+                        <div class="error">
+                        <ul>
+                        <? foreach($_SESSION['errors'] as $error):?>
+
+                        <li>
+                            <? echo $error; ?>
+                        </li>
+                        <?
+                            endforeach;
+                            unset($_SESSION['errors']);
+                        ?>
+                        </ul>
+                        </div>
+                    <?endif;?>
             </div>
         </div>
         <script src="js/navbar.js"></script>

@@ -83,7 +83,9 @@ class Table{
         $statement->execute();
 
     }
-    public function dropTable(){
-
+    public static function dropTable($name){
+        $connection = Connection::getConnection();
+        $statement = $connection->prepare("DROP TABLE $name");
+        $statement->execute();
     }
 }
