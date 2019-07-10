@@ -173,4 +173,15 @@ class Model {
         $statment->execute();
         return $statment->fetchAll(PDO::FETCH_BOTH);
     }
+
+
+    public function attach(Model $obj,$table){
+        
+        $fieldname1=strtolower(get_class($this))."_id";
+        $fieldname2=strtolower(get_class($obj))."_id";
+        $statment = $this->getConnection()->prepare("INSERT INTO $table ( $fieldname1,$fieldname2) VALUES ( :fir,:sec)");
+        $statment->bindParam(":fir",$this->id);
+        $statment->bindParam(":sec",$obj->id);
+        $statment->execute();
+    }
 }

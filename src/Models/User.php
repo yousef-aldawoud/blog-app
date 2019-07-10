@@ -2,6 +2,7 @@
 session_start();
 require_once "Model.php";
 require_once "Help.php";
+require_once "Role.php";
 class User extends Model{
     public static function authenticate($username,$password){
         $user = User::where("username","=",$username);
@@ -57,4 +58,14 @@ class User extends Model{
         $user->insert();
         return $user;
     }
+
+
+    public function hasRole($roleSlug){
+        $role = Role::where("slug","=",$roleSlug);
+        $statement = $this->connection()->prepare("SELECT * FROM user_role WHERE id= ".$role->id);
+        $statement->execute();
+        return $statement->rowCount()>=1;
+    }
+
+
 }

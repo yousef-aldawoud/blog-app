@@ -1,5 +1,8 @@
 <?php
-require_once 'Table.php';
+set_include_path("/var/www/html/");
+
+require_once 'Database/Table.php';
+require_once 'Models/Role.php';
 function create(){
 
     $command = $argv[1];
@@ -58,6 +61,12 @@ function create(){
     $comments->createTable();
     
     echo "\nCreated comments table\n\n";
+
+
+    $adminRole = new Role;
+    $adminRole->name = "admin";
+    $adminRole->slug = "admin";
+    $adminRole->insert();
 }
 
 function drop(){
