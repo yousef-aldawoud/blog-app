@@ -1,7 +1,7 @@
 <?
-set_include_path("/var/www/html");
-require_once("Controllers/CSRFController.php");
-$token = CSRFTokenController::csrf_token();
+    session_start();
+    set_include_path("/var/www/html");
+    require_once('views/csrf_token.php');
 ?>
 <div>
     <div class="bar ">
@@ -24,10 +24,11 @@ $token = CSRFTokenController::csrf_token();
             </button>
             <div class="dropdown-content">
                 <form action="/user.php" method="post">
-                <button class="logout-drop-btn">Logout</button>
                     <input type="hidden" value="<? echo $token; ?>" name="_token">
                     <input type="hidden" name="route" value="logout">
+                    <button class="logout-drop-btn">Logout</button>
                 </form>
+                <a href="/users.php?id=<? echo $user->id; ?>" class="logout-drop-btn">My posts</a>
             </div>
             </div> 
             <?endif;?>

@@ -1,7 +1,3 @@
-<?
-require_once("Controllers/CSRFController.php");
-$token = CSRFTokenController::csrf_token();
-?>
 
 <div class="card">
     <div class="card-title"><? echo $post['title'] ?></div>

@@ -7,6 +7,7 @@ class CSRFTokenController{
     public static function csrf_token(){
         $token = Help::randomString(self::TOKEN_LENGTH);
         $_SESSION['_token']=$token;
+        
         $_SESSION['_token_create_date'] = date('Y-m-d H:i:s');;
         return $_SESSION['_token'];
     }

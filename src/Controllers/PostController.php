@@ -30,13 +30,13 @@ class PostController{
 
         $post = Post::find($_POST['post_id']);
         if($post===null){
-            
             return "/";
         }
 
-        if(!User::check()->id!==$post->user_id&&!User::check()->hasRole("admin")){
+        if(User::check()->id!=$post->user_id&&!User::check()->hasRole("admin")){
             return "/";
         }
         $post->delete();
+        return "/";
     }
 }
