@@ -20,7 +20,7 @@ $token = CSRFTokenController::csrf_token();
                     <label for="content">Post content</label>
                     <textarea name="content" id="content" cols="30" class="textarea" placeholder="Post content" rows="10"></textarea>
                     <div class="sm6 lg6 md6 row right">
-                        <button class="btn">Create</button>
+                        <button class="btn large">Create</button>
                     </div>
                 </form>
                 <?if (isset($_SESSION['errors'])): ?>

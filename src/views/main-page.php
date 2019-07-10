@@ -11,7 +11,7 @@ $posts = $model->getAllStatement()->Pagenaite(5);
         <hr>
         <div style="padding:20px;">
             <? if (User::check()!==null):?>
-                <a href="/create-post.php" class="btn ma">Create post</a>
+                <a href="/create-post.php" class="btn ma large">Create post</a>
             <? endif; ?>
 
             <? if($posts['total']===0):?>

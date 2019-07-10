@@ -161,7 +161,6 @@ body {
     }
 }
 
-
 .card{
     margin: 10px;
     font-family: Sans-serif;
@@ -194,7 +193,7 @@ body {
     display: inline-block;
     margin: 10px; 
 }
-  
+
 .pagination a {
     
     color: black;
@@ -213,9 +212,21 @@ body {
     border-radius: 10px;
     background: rgb(76, 146, 163);
     color: #fff;
-    padding: 10px;
     text-decoration: none;
 }
+ .large{
+
+    padding: 10px;
+}
+
+  .small{
+
+    padding: 5px;
+}
+
 .btn:hover{
-    background: #2794be;
+    background: #2794be !important;
+}
+.red{
+    background: red !important;
 }
