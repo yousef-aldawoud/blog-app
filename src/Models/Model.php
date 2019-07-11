@@ -4,6 +4,7 @@ require_once './Database/Connection.php';
 
 class Model {
     public $id;
+    protected $params;
     protected $statment = "";
     protected $table="";
     public $fields = [];
@@ -16,6 +17,69 @@ class Model {
             $this->table=strtolower(get_class($this))."s";
         }
         $this->connection = Connection::getConnection();
+    }
+
+    public function like($queries,$pagenate=-1,$current_holder="page"){
+        $result = [];
+        $statment = "SELECT * FROM $this->table WHERE ";
+        $first = true;
+        
+        $params = [];
+        foreach($queries as $key=>$value){
+            if($first){
+                $statment = $statment." ".$key." LIKE :".$key;
+                $first = false;
+                $params[":$key"]=$value;
+                continue;
+            }
+
+            $statment = $statment." or ".$key." LIKE :".$key;
+            $params[":$key"]=$value;
+
+        }
+        if($pagenate ===-1){
+            $result = $this->connection->prepare($statment);
+            print_r($params);
+            $result->execute($params);
+            return ['data'=>$result->fetchAll()];
+        }
+        if(empty($_GET[$current_holder])||!is_numeric( $_GET[$current_holder])){
+            $currentPage = 1;
+        }else{
+            $currentPage = $_GET[$current_holder];
+        }
+        
+        $stmt=$this->connection->prepare($statment);
+        $stmt->execute($params);
+        $totalNumberOfRows = $stmt->rowCount();
+        $limit = $pagenate;
+        $numberOfPages = (int) $totalNumberOfRows/$limit;
+        $start = $limit * ($currentPage-1);
+        
+        $statment = $this->connection->prepare($statment." LIMIT :start, :limit");
+        $params[":start"]=$start;
+        $params[":limit"]=$limit;
+        $statment->execute($params);
+        $rows = $statment->fetchAll();
+        if($numberOfPages-intval($numberOfPages)>0){
+            $numberOfPages = intval($numberOfPages)+1;
+        }
+        
+        $result['total']=$totalNumberOfRows;
+        $result['current']=$currentPage;
+        $result['number_of_pages']=$numberOfPages;
+        $result['previous_page']=$currentPage-1;
+        $result['next_page']=$currentPage+1;
+        
+        $result['data']=$rows;
+
+        
+        return $result;
+
+    }
+
+    public function get(){
+
     }
 
     public function hasMany($tableName,$fieldName="\\"){

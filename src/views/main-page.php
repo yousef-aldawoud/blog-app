@@ -3,7 +3,18 @@ set_include_path("/var/www/html");
 require_once('Models/Post.php');
 require_once('Models/User.php');
 $model = new Post;
-$posts = $model->getAllStatement()->Pagenaite(5);
+if(isset($_GET['q'])){
+    $query=[
+        "title"=>"%".$_GET['q']."%",
+        "content"=>"%".$_GET['q']."%"
+    ];
+    $posts = $model->like($query,6);
+    
+}else{
+
+    $posts = $model->getAllStatement()->Pagenaite(6);
+    $page = "?page";
+}
 ?>
 <div class="container">
     <div class="main-container">
@@ -28,10 +39,18 @@ $posts = $model->getAllStatement()->Pagenaite(5);
                     <a href="/?page=<?echo $posts['previous_page'] ?>">&laquo;</a>
                 <? endif;?>
                 <? for ($i=1 ;$i< $posts['number_of_pages']+1;$i++) :?>
+                    <? if (!isset($_GET['q'])){
+                        $link="/?page=$i";
+                        
+                    }else{
+                        $link = "/?page=$i&q=".$_GET['q'];
+                    }
+
+                    ?>
                     <? if($posts['current']==$i) :?>
-                        <a href="?page=<? echo $i;?>" class="active"><? echo $i;?></a>
+                        <a href="<? echo $link;?>" class="active"><? echo $i;?></a>
                     <? else :?>
-                        <a href="?page=<? echo $i;?>" ><? echo $i;?></a>
+                        <a href="<? echo $link;?>" ><? echo $i;?></a>
                         
                     <? endif ;?>
                 <? endfor;?>
