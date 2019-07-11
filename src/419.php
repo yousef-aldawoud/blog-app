@@ -1,5 +1,5 @@
 <?
-set_include_path("var/www/html/");
+set_include_path(getenv("INCLUDE_PATH"));
 session_start();
 if(!isset($_SESSION['_token_error'])){
     header("Location: /");

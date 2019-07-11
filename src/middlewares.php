@@ -1,6 +1,6 @@
 <?
 
-set_include_path("var/www/html/");
+set_include_path(getenv("INCLUDE_PATH"));
 require_once 'Middlewares/GuestMiddleware.php';
 require_once 'Middlewares/AuthMiddleware.php';
 require_once 'Middlewares/ModifyPostMiddleware.php';

@@ -1,5 +1,5 @@
 <?php
-set_include_path("/var/www/html");
+set_include_path(getenv("INCLUDE_PATH"));
 require_once("Models/Model.php");
 class Role extends Model{
     public static function findBySlug($slug){

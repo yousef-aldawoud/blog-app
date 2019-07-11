@@ -1,5 +1,5 @@
 <?php
-set_include_path("var/www/html/");
+set_include_path(getenv("INCLUDE_PATH"));
 require_once 'Middlewares/Middleware.php';
 require_once 'Models/User.php';
 require_once 'Models/Post.php';
