@@ -65,14 +65,17 @@ include('views/main-layout.php');
                 </div>
                 <h3>Comments</h3>
                 <hr>
+                <?if(User::check()!==null): ?>
                 <form action="/comments.php" method="post">
                     <input type="text" placeholder="Enter your comment" name="comment" class="textfield">
                     <input type="hidden" value="<? print_str($token) ?>" name="_token">
                     <input type="hidden" value="<? print_str($post->id) ?>" name="post_id">
+                    <input type="hidden" value="create" name="route">
                     <div class="row right">
                         <button class="btn large">Comment</button>
                     </div>
                 </form>
+                <?endif;?>
             </div>
             <?if (isset($_SESSION['errors'])): ?>
                         <div class="error">
@@ -91,7 +94,7 @@ include('views/main-layout.php');
             <?endif;?>
 
             <div>
-                <? foreach($post->comments()->get() as $comment):?>
+                <? foreach($post->comments()->orderByDate()->get() as $comment):?>
                 <? include "views/comment.php"; ?>
                 <? endforeach;?>
             </div>

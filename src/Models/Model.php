@@ -163,8 +163,12 @@ class Model {
         $result['data']=$rows;
         return $result;
     }
+    public function orderByDate($desc="DESC"){
+        $this->statment = $this->statment . " order by created_at $desc";
+        return $this;
+    }
     public function getAllStatement(){
-        $this->statment= "SELECT * FROM $this->table";
+        $this->statment= "SELECT * FROM $this->table ";
         return $this;
     }
     public static function find($id){

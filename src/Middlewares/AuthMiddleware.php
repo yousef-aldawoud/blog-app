@@ -3,7 +3,7 @@ set_include_path("var/www/html/");
 require_once 'Middlewares/Middleware.php';
 require_once 'Models/User.php';
 class AuthMiddleware implements Middleware{
-    private $routes = ['/create-post.php',"/update-post.php"];
+    private $routes = ['/create-post.php',"/update-post.php","/comments.php"];
     public function allow():bool{
         if(in_array(explode ("?",$_SERVER['REQUEST_URI'])[0] ,$this->routes)){
             return User::check()!==null;
