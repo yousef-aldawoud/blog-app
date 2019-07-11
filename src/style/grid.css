@@ -223,7 +223,18 @@ body {
 
     padding: 5px;
 }
-
+.btn-link{
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.space-between{
+    justify-content: space-between;
+}
+.red-text{
+    color:red;
+}
 .btn:hover{
     background: #2794be !important;
 }

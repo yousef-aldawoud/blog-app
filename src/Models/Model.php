@@ -79,12 +79,12 @@ class Model {
     }
 
     public function get(){
-
+        return $this->getAll();
     }
 
     public function hasMany($tableName,$fieldName="\\"){
         if($fieldName==="\\"){
-            $fieldName=substr($this->table,0,strlen($this->table));
+            $fieldName=strtolower(get_class($this))."_id";
         }
         $this->statment = "SELECT * FROM $tableName WHERE $fieldName = $this->id";
         return $this;
@@ -94,6 +94,7 @@ class Model {
         $statment = $this->connection->prepare($this->statment);
         $statment->execute();
         $rows = $statment->fetchAll();
+        return $rows;
     }
 
     public function insert(){

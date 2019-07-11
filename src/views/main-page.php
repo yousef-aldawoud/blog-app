@@ -2,6 +2,7 @@
 set_include_path("/var/www/html");
 require_once('Models/Post.php');
 require_once('Models/User.php');
+require_once('Controllers/XSSController.php');
 $model = new Post;
 if(isset($_GET['q'])){
     $query=[
@@ -36,7 +37,7 @@ if(isset($_GET['q'])){
 
             <div class="pagination">
                 <? if($posts['previous_page']>0) :?>
-                    <a href="/?page=<?echo $posts['previous_page'] ?>">&laquo;</a>
+                    <a href="/?page=<?print_str( $posts['previous_page']) ?>">&laquo;</a>
                 <? endif;?>
                 <? for ($i=1 ;$i< $posts['number_of_pages']+1;$i++) :?>
                     <? if (!isset($_GET['q'])){
@@ -48,14 +49,14 @@ if(isset($_GET['q'])){
 
                     ?>
                     <? if($posts['current']==$i) :?>
-                        <a href="<? echo $link;?>" class="active"><? echo $i;?></a>
+                        <a href="<? print_str( $link);?>" class="active"><? print_str( $i);?></a>
                     <? else :?>
-                        <a href="<? echo $link;?>" ><? echo $i;?></a>
+                        <a href="<? print_str( $link);?>" ><? print_str( $i);?></a>
                         
                     <? endif ;?>
                 <? endfor;?>
                 <? if($posts['next_page']<=$posts['number_of_pages']) :?>
-                    <a href="/?page=<?echo $posts['next_page'] ?>">&raquo;</a>
+                    <a href="/?page=<?print_str( $posts['next_page']) ?>">&raquo;</a>
                 <? endif;?>
             </div>
         </div>
