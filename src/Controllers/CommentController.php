@@ -24,4 +24,15 @@ class CommentController{
         return $_SERVER['HTTP_REFERER'];
 
     }
+    public function delete(){
+        $comment = Comment::find($_POST['comment_id']);
+        if($comment === null){
+            return $_SERVER['HTTP_REFERER'];
+        }
+        if(User::check()->id===$comment->user_id&&User::check()->hasRole("admin")){
+            return $_SERVER['HTTP_REFERER'];
+        }
+        $comment->delete();
+        return $_SERVER['HTTP_REFERER'];
+    }
 }

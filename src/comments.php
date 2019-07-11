@@ -25,7 +25,8 @@ switch($_POST['route']){
         header($link);
         break;
     case "delete":
-        echo "lel";
+        $link = "Location: ".$commentController->delete();
+        header($link);
         break;
         
 }

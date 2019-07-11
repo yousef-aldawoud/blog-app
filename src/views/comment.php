@@ -10,9 +10,11 @@
 </p>
 <? if(User::check()!==null):?>
     <?if(User::check()->hasRole("admin")||User::check()->id==$comment['user_id']):?>
-        <form class="row space-between">
+        <form class="row space-between" action="/comments.php" method="post">
             <div style="font-size:8pt;"><?print_str($comment['created_at']);?></div>
-            
+            <input type="hidden" value="<? print_str($token) ?>" name="_token">
+            <input type="hidden" value="delete" name="route">
+            <input type="hidden" value="<? print_str($comment['id']) ?>" name="comment_id">
             <button class="btn-link red-text  small">delete</button>
         </form>
         <?else:?>
