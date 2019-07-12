@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 set_include_path(getenv("INCLUDE_PATH"));
 require_once("middlewares.php");
