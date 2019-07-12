@@ -15,7 +15,7 @@ include('views/main-layout.php');
     
 <body>
         <?php include('views/navbar.php');?>
-        <? if(empty($_GET['id'])): ?>
+        <?php if(empty($_GET['id'])){ ?>
         <div class="container">
             <div class="main-container">
                 <h1>User not found</h1>
@@ -23,22 +23,21 @@ include('views/main-layout.php');
             </div>
         </div>
 
-        <? die() ?>
-        <?endif;?>
+        <?php die();
+        }?>
 
-        <? if(User::find($_GET['id'])===null): ?>
+        <?php if(User::find($_GET['id'])===null){ ?>
         <div class="container">
             <div class="main-container">
                 <h1>User not found</h1>
                 
             </div>
         </div>
-        <? else:?>
-        <? 
+        <?php }else{
+             
             $user = User::find($_GET['id']); 
             $posts=$user->posts()->Pagenaite(10);
-        ?>
-        <?endif;?>
+        }?>
         
         <div class="container">
             <div class="main-container">
@@ -47,21 +46,21 @@ include('views/main-layout.php');
         <div style="padding:20px;">
             
 
-            <? if($posts['total']===0):?>
+            <?php if($posts['total']===0){?>
                 <p class="">No posts </p>
-            <? endif ?>
+    <?php } ?>
         </div>
-        <? foreach($posts['data'] as $post): ?>
-            <?php include('views/post.php')?>
-        <? endforeach; ?>
+        <?php foreach($posts['data'] as $post){ 
+             include('views/post.php');
+         } ?>
         <div class=" row center">
 
-            <div class="pagination">
-                <? if($posts['previous_page']>0) :?>
-                    <a href="/?page=<?print_str( $posts['previous_page']) ?>">&laquo;</a>
-                <? endif;?>
-                <? for ($i=1 ;$i< $posts['number_of_pages']+1;$i++) :?>
-                    <? if (!isset($_GET['q'])){
+        <div class="pagination">
+                <?php if($posts['previous_page']>0) {?>
+                    <a href="/?page=<?php print_str( $posts['previous_page']) ?>">&laquo;</a>
+        <?php }?>
+                <?php for ($i=1 ;$i< $posts['number_of_pages']+1;$i++) {?>
+                    <?php if (!isset($_GET['q'])){
                         $link="/?page=$i";
                         
                     }else{
@@ -69,16 +68,16 @@ include('views/main-layout.php');
                     }
 
                     ?>
-                    <? if($posts['current']==$i) :?>
-                        <a href="<? print_str( $link);?>" class="active"><? print_str( $i);?></a>
-                    <? else :?>
-                        <a href="<? print_str( $link);?>" ><? print_str( $i);?></a>
+                    <?php if($posts['current']==$i) {?>
+                        <a href="<?php print_str( $link);?>" class="active"><?php print_str( $i);?></a>
+                    <?php }else{?>
+                        <a href="<?php print_str( $link);?>" ><?php print_str( $i);?></a>
                         
-                    <? endif ;?>
-                <? endfor;?>
-                <? if($posts['next_page']<=$posts['number_of_pages']) :?>
+                    <?php }?>
+                    <?php }?>
+                <?php if($posts['next_page']<=$posts['number_of_pages']) {?>
                     <a href="/?page=<?print_str( $posts['next_page']) ?>">&raquo;</a>
-                <? endif;?>
+                <?php }?>
             </div>
         </div>
     </div>
