@@ -1,4 +1,4 @@
-<?
+<?php
 set_include_path(getenv("INCLUDE_PATH"));
 require_once("Models/User.php");
 
@@ -11,8 +11,7 @@ if(!User::check()->hasRole("admin")){
 }
 $model = new User;
 $users = $model->getAllStatement()->Pagenaite(10);
- ?>
-<? include('views/main-layout.php');?>
+  include('views/main-layout.php');?>
 <body>
     <?php include('views/navbar.php');?>
     <div class="container">
@@ -27,28 +26,28 @@ $users = $model->getAllStatement()->Pagenaite(10);
             <th>#</th>
             <th>#</th>
         </tr>
-        <? foreach($users['data'] as $user) :?>
+        <?php foreach($users['data'] as $user) {?>
         <tr>
-            <td><? print_str($user['name']) ?></td>
-            <td><? print_str($user['username']) ?></td>
-            <td><? print_str($user['created_at']) ?></td>
+            <td><?php print_str($user['name']) ?></td>
+            <td><?php print_str($user['username']) ?></td>
+            <td><?php print_str($user['created_at']) ?></td>
             <td>
-                <a href="user-page?id=<? print_str($user['id']) ?>">posts</a>
+                <a href="user-page.php?id=<?php print_str($user['id']) ?>">posts</a>
             </td>
             <td>
-                <? if(!User::find($user['id'])->hasRole("admin")) :?>
+                <?php if(!User::find($user['id'])->hasRole("admin")) {?>
                 <form action="user.php" method="post">
-                    <input type="hidden" name="user_id" value="<? print_str( $user['id']) ?>">
-                    <input type="hidden" name="_token" value="<? print_str( $token )?>">
+                    <input type="hidden" name="user_id" value="<?php print_str( $user['id']) ?>">
+                    <input type="hidden" name="_token" value="<?php print_str( $token )?>">
                     <input type="hidden" name="route" value="delete">
                     <button class="btn red">delete</button>
                 </form>
-                <? else:?>
+                <?php }else{?>
                 # is an admin
-                <?endif;?>
+                <?php }?>
             </td>
         </tr>
-        <?endforeach;?>
+                <?php }?>
         </table>    
         </div>
     </div>
