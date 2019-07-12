@@ -8,9 +8,10 @@ body {
     margin-right:15%;
     display: flex;
     justify-content: space-around;
-    
+    min-height: 100%;
 }
 .main-container{
+    min-height: 100%;
     padding: 20px;
     flex-basis: 70%;
     background: white;

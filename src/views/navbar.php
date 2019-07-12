@@ -29,6 +29,11 @@
                     <button class="logout-drop-btn">Logout</button>
                 </form>
                 <a href="/user-page.php?id=<? echo $user->id; ?>" class="logout-drop-btn">My posts</a>
+                <? if ($user=User::check()):?>
+                    <? if(User::check()->hasRole("admin")):?>
+                        <a href="/admin-dashboard.php" class="logout-drop-btn">admin</a>
+                    <?endif;?>
+                <?endif;?>
             </div>
             </div> 
             <?endif;?>

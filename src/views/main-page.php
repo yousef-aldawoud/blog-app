@@ -62,12 +62,11 @@ if(isset($_GET['q'])){
         </div>
     </div>
     <div class="side-container">
-        <h2>Pupular posts</h2>
-        <h3>Post 1</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-        <h3>Post 2</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-        <h3>Post 2</h3>
+        <h2>Famous quotes</h2>
+        <h3>Qoute 1</h3>
+        <p>Don't dream about success work for it </p>
+        <h3>Qoute 2</h3>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
     </div>
 </div>
+<? require_once "views/footer.php";?>

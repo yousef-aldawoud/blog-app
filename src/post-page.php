@@ -101,5 +101,6 @@ include('views/main-layout.php');
             </div>
         </div>
         <script src="js/navbar.js"></script>
+        <? require_once "views/footer.php"?>
     </body>
 </html> 
