@@ -34,7 +34,7 @@ php Database/migration.php migrate
 ```
 ### Setup using apache webserver
 1. Copy the files in the `src` folder to apache hosting point
-2. Change the mysql database name, username and password in the dev.env file
+2. Set your enviroment variables to your mysql database name, username and password in your server 
 
 ```
 MYSQL_HOST=[YOUR_HOST_NAME]
@@ -45,7 +45,14 @@ MYSQL_DATABASE=[YOUR_DATABASE_NAME]
 INCLUDE_PATH=[WHERE_YOUR_APPLICATION_IS_BASED]
 ```
 
-2. Migrate the databases by running the following command inside your container.
+in case you don't want to use enviroment variables you can change the user name and password in the src/Database/Connection.php file uncomment and write your password and username
+
+```
+    //self::$user = "your username";
+    //self::$password = "your password ";
+```
+
+3. Migrate the databases by running the following command inside your container.
 
 ```
 php Database/migration.php migrate
