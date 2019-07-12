@@ -5,7 +5,6 @@ require_once 'Database/Table.php';
 require_once 'Models/Role.php';
 function create(){
 
-    $command = $argv[1];
     $users = new Table("users");
     
     //creates user table
