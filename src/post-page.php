@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 set_include_path(getenv("INCLUDE_PATH"));
 require_once("middlewares.php");
@@ -16,7 +16,7 @@ include('views/main-layout.php');
 <body>
         <?php include('views/navbar.php');?>
 
-        <? if(empty($_GET['post_id'])): ?>
+        <?php if(empty($_GET['post_id'])){ ?>
         
         <div class="container">
             <div class="main-container">
@@ -24,22 +24,20 @@ include('views/main-layout.php');
                 
             </div>
         </div>
-        <? die() ?>
-        <?endif;?>
+        
+        <?php die();}?>
 
-        <? if(Post::find($_GET['post_id'])===null): ?>
+        <?php if(Post::find($_GET['post_id'])===null){ ?>
         <div class="container">
             <div class="main-container">
                 <h1>Post not found</h1>
                 
             </div>
         </div>
-        <? die() ?>
-        <? else:?>
-        <? 
+        <?php die() ;
+    }else{ 
             $post = Post::find($_GET['post_id']); 
-        ?>
-        <?endif;?>
+    }?>
 
 
         <div class="container">
@@ -48,55 +46,55 @@ include('views/main-layout.php');
             <div>
                 <div class="card">
                     <div class="card-content">
-                        <h4><?print_str($post->title) ?></h4>
-                        <p><? print_str($post->content)?></p>
+                        <h4><?php print_str($post->title) ?></h4>
+                        <p><?php print_str($post->content)?></p>
                         <div class="row right">
-                            <h5>by <? 
+                            <h5>by <?php
                             $user=User::find($post->user_id);
                             $user===null?print( "<b style='color:red'>user deleted</b>"):print_str($user->name) ;
                             ?></h5>
                         </div>
                     </div>
                     <div class="card-end" style="font-size:9pt;">
-                        <?
+                        <?php
                             print_str("Created at ".$post->created_at);
                         ?>
                     </div>
                 </div>
                 <h3>Comments</h3>
                 <hr>
-                <?if(User::check()!==null): ?>
+                <?php if(User::check()!==null){ ?>
                 <form action="/comments.php" method="post">
                     <input type="text" placeholder="Enter your comment" name="comment" class="textfield">
-                    <input type="hidden" value="<? print_str($token) ?>" name="_token">
-                    <input type="hidden" value="<? print_str($post->id) ?>" name="post_id">
+                    <input type="hidden" value="<?php print_str($token) ?>" name="_token">
+                    <input type="hidden" value="<?php print_str($post->id) ?>" name="post_id">
                     <input type="hidden" value="create" name="route">
                     <div class="row right">
                         <button class="btn large">Comment</button>
                     </div>
                 </form>
-                <?endif;?>
+                <?php }?>
             </div>
-            <?if (isset($_SESSION['errors'])): ?>
+            <?php if (isset($_SESSION['errors'])){ ?>
                         <div class="error">
                         <ul>
-                        <? foreach($_SESSION['errors'] as $error):?>
+                        <?php foreach($_SESSION['errors'] as $error){?>
 
                         <li>
-                            <? echo $error; ?>
+                            <?php echo $error; ?>
                         </li>
-                        <?
-                            endforeach;
+                        <?php
+                            };
                             unset($_SESSION['errors']);
                         ?>
                         </ul>
                         </div>
-            <?endif;?>
+                        <?php }?>
 
             <div>
-                <? foreach($post->comments()->orderByDate()->get() as $comment):?>
-                <? include "views/comment.php"; ?>
-                <? endforeach;?>
+                <?php foreach($post->comments()->orderByDate()->get() as $comment){?>
+                <?php include "views/comment.php"; ?>
+                <?php };?>
             </div>
             </div>
         </div>
