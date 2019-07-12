@@ -13,7 +13,6 @@ class Connection{
         self::$server = "mysql:host=".getenv("MYSQL_HOST").";dbname=blog_app";
         self::$user = getenv('MYSQL_USER');
         self::$password = getenv('MYSQL_PASSWORD');
-        echo getenv("MYSQL_PASSWORD");
         try{
             self::$connection = new PDO(self::$server, self::$user,self::$password,$options);
             return self::$connection;
