@@ -43,7 +43,9 @@ class User extends Model{
         }
         return null;
     }
-
+    public function posts(){
+        return $this->hasMany("posts");
+    }
     public static function createUser($username,$name,$password){
         $user = new static();
         $rows=User::where("username","=",$username);

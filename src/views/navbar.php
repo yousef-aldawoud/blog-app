@@ -28,7 +28,7 @@
                     <input type="hidden" name="route" value="logout">
                     <button class="logout-drop-btn">Logout</button>
                 </form>
-                <a href="/users.php?id=<? echo $user->id; ?>" class="logout-drop-btn">My posts</a>
+                <a href="/user-page.php?id=<? echo $user->id; ?>" class="logout-drop-btn">My posts</a>
             </div>
             </div> 
             <?endif;?>

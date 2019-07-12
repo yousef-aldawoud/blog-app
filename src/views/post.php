@@ -1,7 +1,15 @@
 
 <div class="card">
     <div class="card-title"><? print_str( $post['title']) ?></div>
-    <div class="card-content"><? print_str($post['content']) ?> <a href="/post-page.php?post_id=<? print_str( $post['id']);?>" class="show-post-link">read more</a></div>
+
+    <div class="card-content">
+        <h5>by <a href="/user-page.php?id=<? print_str($post['user_id'])?>">
+        <? 
+            $user=User::find($post['user_id']);
+            $user===null?print( "<b style='color:red'>user deleted</b>"):print_str($user->name) ;?>
+        </a></h5>
+        <? print_str($post['content']) ?> <a href="/post-page.php?post_id=<? print_str( $post['id']);?>" class="show-post-link">read more</a>
+    </div>
     <div class="card-end">
 
     
