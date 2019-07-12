@@ -21,6 +21,11 @@ class UserController{
             $_SESSION['errors']=['Name, username, and password mustn\'t be empty'];
             return $_SERVER['HTTP_REFERER'];;
         }
+
+        if(strlen($_POST['password'])<6){
+            $_SESSION['errors']=["Password must be 6 charechters or more"];
+            return  $_SERVER['HTTP_REFERER'];
+        }
         $user=User::createUser($_POST['username'],$_POST['name'],$_POST['password']);
         if($user==null){
             $_SESSION['errors']=[" The `".$_POST["username"]."` username is used"];

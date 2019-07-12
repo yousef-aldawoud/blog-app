@@ -63,3 +63,10 @@ To create an admin user you need to enter the command:-
 php setup/make-admin.php
 ```
 then enter your username password and name.
+
+## Using sample data
+To insert fake data into your database for testing you need to enter the command:-
+```
+php setup/data-sample.php
+```
+then enter your username password and name.
