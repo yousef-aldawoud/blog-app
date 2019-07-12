@@ -1,13 +1,11 @@
-<?
+<?php
 session_start();
 set_include_path(getenv("INCLUDE_PATH"));
 require_once("middlewares.php");
 require_once("Models/Help.php");
 require_once("Controllers/CSRFController.php");
 
-
- ?>
-<? include('views/main-layout.php');?>
+include('views/main-layout.php');?>
 <body>
         <?php include('views/navbar.php');?>
         <div class="container">
@@ -16,28 +14,28 @@ require_once("Controllers/CSRFController.php");
                     <label for="title">Post title</label>
                     <input placeholder="Post title" name="title" id="title" type="text" class="textfield">
                     <input name="route"  type="hidden" value="create-post" >
-                    <input name="_token"  type="hidden" value="<? echo $token; ?>" >
+                    <input name="_token"  type="hidden" value="<?php echo $token; ?>" >
                     <label for="content">Post content</label>
                     <textarea name="content" id="content" cols="30" class="textarea" placeholder="Post content" rows="10"></textarea>
                     <div class="sm6 lg6 md6 row right">
                         <button class="btn large">Create</button>
                     </div>
                 </form>
-                <?if (isset($_SESSION['errors'])): ?>
+                <?php if (isset($_SESSION['errors'])){ ?>
                         <div class="error">
                         <ul>
-                        <? foreach($_SESSION['errors'] as $error):?>
+                        <?php foreach($_SESSION['errors'] as $error){?>
 
                         <li>
-                            <? echo $error; ?>
+                            <?php echo $error; ?>
                         </li>
-                        <?
-                            endforeach;
+                        <?php
+                        }
                             unset($_SESSION['errors']);
                         ?>
                         </ul>
                         </div>
-                    <?endif;?>
+                        <?php }?>
             </div>
         </div>
         <script src="js/navbar.js"></script>
