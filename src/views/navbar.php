@@ -59,9 +59,9 @@
                 <button class="logout collapsed-links" href="/login.php">
                     logout
                 </button>
-
                 <input type="hidden" value="<? echo $token; ?>" name="_token">
                     <input type="hidden" name="route" value="logout">
+                <a href="/user-page.php?id=<? echo User::check()->id ?>" class="logout navlinkside collapsed-links" >My posts</a>
             </form>
             <? endif;?>
             </div>
