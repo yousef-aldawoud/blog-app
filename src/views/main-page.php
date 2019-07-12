@@ -1,4 +1,4 @@
-<? 
+<?php 
 set_include_path(getenv("INCLUDE_PATH"));
 require_once('Models/Post.php');
 require_once('Models/User.php');
@@ -22,25 +22,25 @@ if(isset($_GET['q'])){
         <h1>Posts</h1>
         <hr>
         <div style="padding:20px;">
-            <? if (User::check()!==null):?>
+            <?php if (User::check()!==null){?>
                 <a href="/create-post.php" class="btn ma large">Create post</a>
-            <? endif; ?>
+            <?php } ?>
 
-            <? if($posts['total']===0):?>
+            <?php if($posts['total']===0){?>
                 <p class="">No posts avalible</p>
-            <? endif ?>
+            <?php }?>
         </div>
-        <? foreach($posts['data'] as $post): ?>
+        <?php foreach($posts['data'] as $post){ ?>
             <?php include('views/post.php')?>
-        <? endforeach; ?>
+        <?php } ?>
         <div class=" row center">
 
             <div class="pagination">
-                <? if($posts['previous_page']>0) :?>
-                    <a href="/?page=<?print_str( $posts['previous_page']) ?>">&laquo;</a>
-                <? endif;?>
-                <? for ($i=1 ;$i< $posts['number_of_pages']+1;$i++) :?>
-                    <? if (!isset($_GET['q'])){
+                <?php if($posts['previous_page']>0) {?>
+                    <a href="/?page=<?php print_str( $posts['previous_page']) ?>">&laquo;</a>
+        <?php }?>
+                <?php for ($i=1 ;$i< $posts['number_of_pages']+1;$i++) {?>
+                    <?php if (!isset($_GET['q'])){
                         $link="/?page=$i";
                         
                     }else{
@@ -48,16 +48,16 @@ if(isset($_GET['q'])){
                     }
 
                     ?>
-                    <? if($posts['current']==$i) :?>
-                        <a href="<? print_str( $link);?>" class="active"><? print_str( $i);?></a>
-                    <? else :?>
-                        <a href="<? print_str( $link);?>" ><? print_str( $i);?></a>
+                    <?php if($posts['current']==$i) {?>
+                        <a href="<?php print_str( $link);?>" class="active"><?php print_str( $i);?></a>
+                    <?php }else{?>
+                        <a href="<?php print_str( $link);?>" ><?php print_str( $i);?></a>
                         
-                    <? endif ;?>
-                <? endfor;?>
-                <? if($posts['next_page']<=$posts['number_of_pages']) :?>
+                    <?php }?>
+                    <?php }?>
+                <?php if($posts['next_page']<=$posts['number_of_pages']) {?>
                     <a href="/?page=<?print_str( $posts['next_page']) ?>">&raquo;</a>
-                <? endif;?>
+                <?php }?>
             </div>
         </div>
     </div>
@@ -69,4 +69,3 @@ if(isset($_GET['q'])){
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
     </div>
 </div>
-<? require_once "views/footer.php";?>
