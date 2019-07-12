@@ -11,8 +11,11 @@ class Connection{
             PDO::ATTR_EMULATE_PREPARES => false
         );
         self::$server = "mysql:host=".getenv("MYSQL_HOST").";dbname=blog_app";
-        self::$user = "root";
-        self::$password = "root";
+        self::$user = getenv('MYSQL_USER');
+        self::$password = getenv('MYSQL_PASSWORD');
+        
+        //self::$user = "your username";
+        //self::$password = "your password ";
         try{
             self::$connection = new PDO(self::$server, self::$user,self::$password,$options);
             return self::$connection;
