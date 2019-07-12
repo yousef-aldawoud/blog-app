@@ -37,4 +37,22 @@ class UserController{
         
     }
 
+
+    public function delete(){
+        if(empty($_POST['user_id'])){
+            return "/";
+        }
+
+        $user = User::find($_POST['user_id']);
+        if($user===null){
+            return "/";
+        }
+        if(User::check()->hasRole("admin")&&User::check()->id!==$_POST['user_id']){
+
+            $user->delete();
+            return $_SERVER['HTTP_REFERER'];
+        }
+        return "/";
+    }
+
 }

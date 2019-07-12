@@ -13,5 +13,4 @@ RUN docker-php-ext-enable pdo_mysql
 RUN a2enmod rewrite
 RUN a2enmod headers
 
-
-RUN  service apache2 restart
+RUN service apache2 restart

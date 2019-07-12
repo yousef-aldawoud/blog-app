@@ -1,6 +1,6 @@
 <?php
 set_include_path(getenv("INCLUDE_PATH"));
-require_once './Database/Connection.php';
+require_once 'Database/Connection.php';
 
 class Model {
     public $id;

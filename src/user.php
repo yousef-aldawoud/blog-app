@@ -32,4 +32,9 @@ switch($_POST['route']){
         $link = "Location: ".$userController->logout();
         header($link);
         break;
+    
+    case "delete":
+        $link = "Location: ".$userController->delete();
+        header($link);
+        break;
 }
